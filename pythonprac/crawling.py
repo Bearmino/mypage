@@ -15,8 +15,9 @@ soup = BeautifulSoup(data.text, 'html.parser')
 #old_content > table > tbody > tr:nth-child(4) > td.title > div > a
 
 trs = soup.select('#old_content > table > tbody > tr')
-
+# movies (tr들) 의 반복문을 돌리기
 for tr in trs:
+    # movie 안에 a 가 있으면,
     a = tr.select_one('td.title > div > a')
     if a is not None:
         title = a.text
