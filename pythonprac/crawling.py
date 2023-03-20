@@ -7,23 +7,23 @@ data = requests.get('https://movie.naver.com/movie/sdb/rank/rmovie.naver?sel=pnt
 
 # HTML을 BeautifulSoup이라는 라이브러리를 활용해 검색하기 용이한 상태로 만듦
 # soup이라는 변수에 "파싱 용이해진 html"이 담긴 상태가 됨
-# 이제 코딩을 통해 필요한 부분을 추출하면 된다.
 
 soup = BeautifulSoup(data.text, 'html.parser')
 
 #old_content > table > tbody > tr:nth-child(3) > td.title > div > a
 #old_content > table > tbody > tr:nth-child(4) > td.title > div > a
 
-trs = soup.select('#old_content > table > tbody > tr')
-# movies (tr들) 의 반복문을 돌리기
-for tr in trs:
+#select를 이용해서, tr들을 불어오기
+movie_trs = soup.select('#old_content > table > tbody > tr')
+# movie_trs (tr들) 의 반복문을 돌리기
+for tr in movie_trs:
     # movie 안에 a 가 있으면,
     a = tr.select_one('td.title > div > a')
     if a is not None:
-        title = a.text
-        rank = tr.select_one('td:nth-child(1) > img')['alt']
-        star = tr.select_one('td.point').text
-        print(rank, title, star)
+        title = a.text   # a 태그 사이의 텍스트를 가져오기
+        rank = tr.select_one('td:nth-child(1) > img')['alt']  # img 태그의 alt 속성값을 가져오기
+        star = tr.select_one('td.point').text # td 태그 사이의 텍스트를 가져오기
+        print(rank, title, star) 
           
 # 선택자를 사용하는 방법 (copy selector)
 #   soup.select('태그명')

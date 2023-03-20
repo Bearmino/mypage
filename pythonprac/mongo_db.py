@@ -31,3 +31,6 @@ print(user)
 db.users.update_one({'name':'철수'},{'$set':{'age':18}})
 user_one = db.users.find_one({'name':'철수'})
 print(user_one)
+
+#값 삭제하기(delete_one)
+db.users.delete_one({'name':'철수'})
