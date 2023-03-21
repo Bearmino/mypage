@@ -15,9 +15,9 @@ soup = BeautifulSoup(data.text, 'html.parser')
 # select를 이용해서, tr들을 불러오기
 movies = soup.select('#old_content > table > tbody > tr')
 
-# movies (tr들) 의 반복문을 돌리기
+# movies (movie들) 의 반복문을 돌려서 mongo_db에 데이터 저장
 for movie in movies:
-    # movie 안에 a 가 있으면,
+    # movie 안에 a_tag 가 있으면,
     a_tag = movie.select_one('td.title > div > a')
     if a_tag is not None:
         rank = movie.select_one('td:nth-child(1) > img')['alt'] # img 태그의 alt 속성값을 가져오기
@@ -29,3 +29,20 @@ for movie in movies:
             'star': star
         }
         db.movies.insert_one(doc)
+
+#1.영화제목 '가버나움'의 평점을 가져오기
+movie = db.movies.find_one({'title':'가버나움'})
+print(movie['star'])
+
+#2.'가버나움'의 평점과 같은 평점의 영화 제목을 가져오기
+movie = db.movies.find_one({'title':'가버나움'})
+targe_star = movie['star']
+
+movies= list(db.movies.find({'star':targe_star},{'_id':False}))
+print(movies)
+
+for a in movies:
+    print(a['title'])
+
+#3.'밥정'영화의 평점을 0으로 만들기
+db.movies.update_one({'title':'밥정'},{'$set':{'star':0}})
