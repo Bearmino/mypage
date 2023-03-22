@@ -8,6 +8,10 @@
     <title>Document</title>
 
     <script>
+        // function hey() {
+        //     alert('안녕')
+        // }
+
         function get_request() {
             fetch("/test").then(res => res.json()).then(data => {
                 console.log(data)
@@ -24,9 +28,10 @@
         }
     </script>
 </head>
-    <h1>GET,POST 이해</h1>
-    <button onclick="get_request()">나는 GET이야!!</button>
-    <button onclick="post_request()">나는 POST야!!</button>
+<h1>GET,POST 이해</h1>
+<!-- <button onclick="hey()">나는 버튼</button> -->
+<button onclick="get_request()">나는 GET이야!!</button>
+<button onclick="post_request()">나는 POST야!!</button>
 </body>
 
 </html>

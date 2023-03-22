@@ -8,13 +8,15 @@ app = Flask(__name__)
 # def home():
 #    return 'This is Home!'
 
+# @app.route('/mypage')
+# def mypage():
+#    return render_template('index.html')
+
+
 @app.route('/')
 def home():
    return render_template('index.html')
 
-# @app.route('/mypage')
-# def mypage():
-#    return render_template('index.html')
 
 @app.route('/test', methods=['GET'])
 def test_get():
