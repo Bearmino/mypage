@@ -8,14 +8,25 @@
     <title>Document</title>
 
     <script>
-        function hey() {
-          alert('안녕')
+        function get_request() {
+            fetch("/test").then(res => res.json()).then(data => {
+                console.log(data)
+            })
+        }
+
+        function post_request() {
+            let formData = new FormData();
+            formData.append("title_give", "블랙팬서");
+
+            fetch("/test2", { method: "POST", body: formData }).then(res => res.json()).then(data => {
+                console.log(data)
+            })
         }
     </script>
 </head>
-
-<body>
-    <button onclick="hey()">나는 버튼!!</button>
+    <h1>GET,POST 이해</h1>
+    <button onclick="get_request()">나는 GET이야!!</button>
+    <button onclick="post_request()">나는 POST야!!</button>
 </body>
 
 </html>
