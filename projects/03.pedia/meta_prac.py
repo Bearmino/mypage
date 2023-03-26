@@ -1,3 +1,4 @@
+#조각 파일
 import requests
 from bs4 import BeautifulSoup
 
